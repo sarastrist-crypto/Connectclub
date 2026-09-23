@@ -1,0 +1,122 @@
+/* Cobbled Works brand tokens — refer hub */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ocean:   #0E2638;
+    --ocean-m: #0F2D45;
+    --ocean-l: #123A5C;
+    --azure:   #2E8FE0;
+    --deep:    #155FAA;
+    --sun:     #FFC53D;
+    --sky:     #F2F8FD;
+    --money:   #1B7F43;
+    --steel:   #8BA7C0;
+
+    --grad: linear-gradient(90deg, #155FAA, #2E8FE0, #FFC53D);
+    --grad-bar-h: 3px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--ocean);
+    color: var(--sky);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Dot-grid texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(46,143,224,0.12) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  em {
+    font-style: normal;
+    color: var(--sun);
+    font-weight: 700;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer components {
+  /* Gradient accent bar */
+  .grad-bar {
+    height: var(--grad-bar-h);
+    background: var(--grad);
+    border-radius: 2px;
+  }
+
+  /* Metric tile */
+  .tile {
+    @apply bg-ocean-mid rounded-xl p-5 border border-azure/20 relative overflow-hidden;
+  }
+  .tile::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(46,143,224,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Status badge */
+  .badge {
+    @apply font-mono text-xs px-2 py-0.5 rounded-full border;
+  }
+  .badge-submitted  { @apply bg-azure/10 text-azure border-azure/30; }
+  .badge-contacted  { @apply bg-sky/10 text-sky border-sky/30; }
+  .badge-engaged    { @apply bg-sun/10 text-sun border-sun/30; }
+  .badge-demo       { @apply bg-purple-400/10 text-purple-300 border-purple-400/30; }
+  .badge-proposal   { @apply bg-orange-400/10 text-orange-300 border-orange-400/30; }
+  .badge-connected  { @apply bg-money/10 text-green-400 border-money/30; }
+  .badge-lost       { @apply bg-red-500/10 text-red-400 border-red-500/30; }
+
+  /* Primary button */
+  .btn-primary {
+    @apply bg-azure hover:bg-azure/90 active:scale-95 text-white font-semibold
+           px-6 py-3 rounded-lg transition-all duration-150 cursor-pointer select-none;
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply border border-azure/40 hover:border-azure text-azure hover:bg-azure/10
+           font-semibold px-6 py-3 rounded-lg transition-all duration-150 cursor-pointer select-none;
+  }
+
+  /* Form input */
+  .field {
+    @apply w-full bg-ocean-light border border-azure/20 focus:border-azure
+           text-sky placeholder-steel rounded-lg px-4 py-3 outline-none
+           transition-colors duration-150;
+  }
+
+  .field-label {
+    @apply block font-mono text-xs text-steel uppercase tracking-widest mb-1.5;
+  }
+}
+
+/* Scroll-reveal: elements start invisible, JS adds .revealed */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
